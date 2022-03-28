@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { foundations } from "./foundations";
+import components from "./components";
 
 export const theme = extendTheme({
   fonts: {
@@ -7,4 +8,5 @@ export const theme = extendTheme({
     body: "Patrick Hand, sans-serif",
   },
   ...foundations,
+  components,
 });
