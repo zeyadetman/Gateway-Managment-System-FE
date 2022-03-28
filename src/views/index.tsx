@@ -21,18 +21,16 @@ function App(props: Props) {
   function validateName(value: any) {
     let error;
     if (!value) {
-      error = "Name is required";
-    } else if (value.toLowerCase() !== "naruto") {
-      error = "Jeez! You're not a fan 😱";
+      error = "Serial Number is required";
     }
     return error;
   }
 
   return (
     <Center h="100vh">
-      <VStack>
+      <VStack w={"full"}>
         <Formik
-          initialValues={{ name: "Sasuke" }}
+          initialValues={{ serialNumber: "" }}
           onSubmit={(values, actions) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -41,19 +39,38 @@ function App(props: Props) {
           }}
         >
           {(props) => (
-            <Form>
-              <Field name="name" validate={validateName}>
+            <Form
+              style={{
+                display: "flex",
+                gap: "1rem",
+                flexDirection: "column",
+              }}
+            >
+              <Field name="serialNumber" validate={validateName}>
                 {({ field, form }: any) => (
                   <FormControl
-                    isInvalid={form.errors.name && form.touched.name}
+                    isInvalid={
+                      form.errors.serialNumber && form.touched.serialNumber
+                    }
                   >
-                    <FormLabel htmlFor="name">First name</FormLabel>
-                    <Input {...field} id="name" placeholder="name" />
-                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    <VStack align={"start"} shouldWrapChildren>
+                      <FormLabel htmlFor="serialNumber" m="0">
+                        Gateway Serial number
+                      </FormLabel>
+                      <Input
+                        {...field}
+                        id="serialNumber"
+                        placeholder="serialNumber"
+                        w={["full", "sm"]}
+                      />
+                      <FormErrorMessage color={"red"} m="0">
+                        {form.errors.serialNumber}
+                      </FormErrorMessage>
+                    </VStack>
                   </FormControl>
                 )}
               </Field>
-              <HStack>
+              <HStack spacing={2}>
                 <Button isLoading={props.isSubmitting} type="submit">
                   View
                 </Button>
