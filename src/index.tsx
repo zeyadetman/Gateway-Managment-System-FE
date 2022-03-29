@@ -3,18 +3,23 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@fontsource/patrick-hand/400.css";
 import { theme } from "./theme";
-import App from "./views";
+import Layout from "./components/Layout";
+import { renderRoutes } from "./routes";
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
     <ChakraProvider theme={theme}>
-      <Router>
-        <App />
-      </Router>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {renderRoutes()}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

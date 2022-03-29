@@ -5,7 +5,7 @@ interface Props {}
 function ListGateways(props: Props) {
   const {} = props;
 
-  return <div></div>;
+  return <div>List</div>;
 }
 
 export default ListGateways;
