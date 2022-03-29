@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, useNavigate } from "react-router-dom";
 import App from "./views";
 import DeviceUpdate from "./views/Device/DeviceUpdate";
+import ListDevices from "./views/Device/ListDevices";
 import GatewayUpdate from "./views/Gateway/GatewayUpdate";
 import ListGateways from "./views/Gateway/ListGateways";
 import ViewGateway from "./views/Gateway/ViewGateway";
@@ -23,6 +24,7 @@ export const routes = [
   { path: "/gateways", element: <ListGateways /> },
   { path: "/device/edit/:id", element: <DeviceUpdate /> },
   { path: "/device/new", element: <DeviceUpdate /> },
+  { path: "/devices", element: <ListDevices /> },
   {
     path: "*",
     element: <NotFound />,
