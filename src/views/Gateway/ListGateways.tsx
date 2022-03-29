@@ -20,7 +20,7 @@ function ListGateways(props: Props) {
   return (
     <VStack spacing={12}>
       <Heading>List Gatways</Heading>
-      <TableContainer>
+      <TableContainer w={["xs", "full"]}>
         <Table variant="striped">
           <Thead>
             <Tr>

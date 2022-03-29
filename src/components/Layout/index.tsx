@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <Center h="100vh">
+    <Center minH="100vh" py="4">
       <Outlet />
     </Center>
   );

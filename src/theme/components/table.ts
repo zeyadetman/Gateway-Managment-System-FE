@@ -2,6 +2,9 @@
 
 export default {
   baseStyle: ({ theme }: any) => ({
+    table: {
+      overflowX: "scroll",
+    },
     th: {
       borderBottom: "3px solid",
       borderColor: theme.colors.black,

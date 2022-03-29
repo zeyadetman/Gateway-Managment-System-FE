@@ -20,7 +20,7 @@ function ListDevices(props: Props) {
   return (
     <VStack spacing={12}>
       <Heading>List Devices</Heading>
-      <TableContainer>
+      <TableContainer w={["xs", "full"]}>
         <Table variant="striped">
           <Thead>
             <Tr>
