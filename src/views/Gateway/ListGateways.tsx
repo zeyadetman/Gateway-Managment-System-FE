@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { gatewayAPIInstance } from "../../api/gateway";
 import Pagination from "../../components/Pagination";
-import { LIMIT } from "../../utils";
+import { formatDate, LIMIT } from "../../utils";
 
 function ListGateways() {
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ function ListGateways() {
   useEffect(() => {
     console.log({ currentPage });
     fetchGateways(currentPage, limit);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const renderGateways = (gateways: any[]) => {
@@ -62,8 +63,8 @@ function ListGateways() {
           <Td>{gateway?.name}</Td>
           <Td>{gateway?.ip4}</Td>
           <Td isNumeric>{gateway?.devices?.length || 0}</Td>
-          <Td>{gateway?.createdAt}</Td>
-          <Td>{gateway?.updatedAt}</Td>
+          <Td>{formatDate(gateway?.createdAt)}</Td>
+          <Td>{formatDate(gateway?.updatedAt)}</Td>
         </Tr>
       );
     });
@@ -75,7 +76,7 @@ function ListGateways() {
       {loading ? (
         <Text>loading...</Text>
       ) : gateways.length === 0 ? (
-        <Text fontSize={"2xl"} align="center">
+        <Text fontSize={"xl"} align="center">
           No gateways.
           <br />
           <ChakraLink as={Link} to="/gateway/new">
@@ -84,7 +85,7 @@ function ListGateways() {
         </Text>
       ) : (
         <>
-          <TableContainer w={["xs", "full"]}>
+          <TableContainer w={["xs", "sm", "md", "full"]}>
             <Table variant="striped">
               <Thead>
                 <Tr>
@@ -104,11 +105,7 @@ function ListGateways() {
             limit={limit}
             currentPage={currentPage}
             paginationProps={{
-              onChange: (
-                pageNum: number,
-                pagesCount: number,
-                selectedlimit: number
-              ) => {
+              onChange: (pageNum: number) => {
                 setCurrentPage(pageNum);
               },
             }}

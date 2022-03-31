@@ -12,9 +12,11 @@ import {
   Thead,
   Tr,
   HStack,
+  Text,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { gatewayAPIInstance } from "../../api/gateway";
 import { formatDate } from "../../utils";
 
@@ -66,7 +68,13 @@ function ViewGateway() {
         <p>Loading...</p>
       ) : gateway ? (
         <>
-          <Heading>View Gateway</Heading>
+          <Heading textAlign="center">
+            View Gateway
+            <br />
+            <ChakraLink fontSize={"sm"} as={Link} to="/gateways">
+              Click here to view all gateways
+            </ChakraLink>
+          </Heading>
           <VStack spacing={6} w="full">
             <HStack w="full">
               <Stat>
@@ -89,22 +97,59 @@ function ViewGateway() {
               </Stat>
             </HStack>
           </VStack>
-          <TableContainer w={["xs", "sm", "full"]}>
-            <Table variant="striped">
-              <Thead>
-                <Tr>
-                  <Th>Uid</Th>
-                  <Th>Vendor</Th>
-                  <Th>Status</Th>
-                  <Th>Created At</Th>
-                  <Th>Updated At</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {gateway?.devices && renderDevicesList(gateway.devices)}
-              </Tbody>
-            </Table>
-          </TableContainer>
+          {gateway?.devices.length === 0 ? (
+            <Text fontSize={"xl"} align="center">
+              No Devices.
+              <br />
+              <ChakraLink
+                as={Link}
+                to="/device/new"
+                state={{ gateway: gateway?.serialnumber }}
+              >
+                Click Here to create Device
+              </ChakraLink>
+            </Text>
+          ) : (
+            <>
+              <Heading
+                fontSize={"xl"}
+                borderTopRadius="8"
+                bgColor={"highlight"}
+                py="2"
+                px="4"
+                justifyContent={"space-between"}
+                w={["xs", "sm", "md", "full"]}
+                display={"flex"}
+                alignItems={"center"}
+              >
+                <Text>Devices</Text>
+                <ChakraLink
+                  as={Link}
+                  to={"/device/new"}
+                  state={{ gateway: gateway?.serialnumber }}
+                >
+                  <Text fontSize={"sm"}>Add new device</Text>
+                </ChakraLink>
+              </Heading>
+              <TableContainer
+                w={["xs", "sm", "md", "full"]}
+                mt="0px !important"
+              >
+                <Table variant="striped">
+                  <Thead>
+                    <Tr>
+                      <Th>Uid</Th>
+                      <Th>Vendor</Th>
+                      <Th>Status</Th>
+                      <Th>Created At</Th>
+                      <Th>Updated At</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>{renderDevicesList(gateway.devices)}</Tbody>
+                </Table>
+              </TableContainer>
+            </>
+          )}
         </>
       ) : (
         <Heading>No Gateway Found!</Heading>

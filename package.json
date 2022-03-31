@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.8.7",
+    "@choc-ui/chakra-autocomplete": "^4.20.1",
     "@choc-ui/paginator": "^3.4.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",

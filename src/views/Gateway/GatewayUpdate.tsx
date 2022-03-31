@@ -8,32 +8,21 @@ import {
   VStack,
   Link as ChakraLink,
   Heading,
-  Text,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 import { gatewayAPIInstance } from "../../api/gateway";
 import { GatwayValidationSchema } from "../../validations/gateway";
 import ErrorMsg from "../../components/ErrorMsg";
 
-interface Props {}
-
-function GatewayUpdate(props: Props) {
-  const {} = props;
-  const { id } = useParams();
+function GatewayUpdate() {
   const navigate = useNavigate();
   const [error, setError] = React.useState<string | null>(null);
 
-  useEffect(() => {
-    if (id) {
-      console.log(id);
-    }
-  }, [id]);
-
   return (
     <VStack spacing={12}>
-      <Heading>{id ? `Update ${id}` : "Create"}</Heading>
+      <Heading>Create New Gateway</Heading>
       <Formik
         initialValues={{ serialnumber: "", name: "", ip4: "" }}
         validationSchema={GatwayValidationSchema}
@@ -121,7 +110,7 @@ function GatewayUpdate(props: Props) {
               <ErrorMsg error={error} onClose={() => setError(null)} />
               <HStack spacing={2}>
                 <Button isLoading={props.isSubmitting} type="submit">
-                  {id ? "Update" : "Create"}
+                  Create
                 </Button>
                 <ChakraLink as={Link} to="/gateways">
                   List Gateways

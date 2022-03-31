@@ -7,6 +7,12 @@ export interface IDeviceInputDTO {
   gatewaySerialNumber: string;
 }
 
+export interface IDeviceUpdateDTO {
+  vendor?: string;
+  status?: "online" | "offline";
+  gatewaySerialNumber?: string;
+}
+
 export class DeviceAPIs {
   getDeviceByUid(uid: number) {
     return API.get(`/device/${uid}`);
@@ -18,6 +24,10 @@ export class DeviceAPIs {
 
   deleteDeviceByUid(uid: number) {
     return API.delete(`/device/${uid}`);
+  }
+
+  updateDeviceByUid(uid: number, device: IDeviceInputDTO) {
+    return API.patch(`/device/${uid}`, device);
   }
 }
 

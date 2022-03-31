@@ -4,6 +4,7 @@ import input from "./input";
 import select from "./select";
 import checkbox from "./checkbox";
 import table from "./table";
+import form from "./form";
 
 export default {
   Button: button,
@@ -11,4 +12,5 @@ export default {
   Select: select,
   Checkbox: checkbox,
   Table: table,
+  Form: form,
 };
