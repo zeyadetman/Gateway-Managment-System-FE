@@ -85,7 +85,22 @@ function ListGateways() {
         </Text>
       ) : (
         <>
-          <TableContainer w={["xs", "sm", "md", "full"]}>
+          <Heading
+            fontSize={"xl"}
+            borderTopRadius="8"
+            bgColor={"highlight"}
+            py="2"
+            px="4"
+            justifyContent={"flex-end"}
+            w={["xs", "sm", "md", "full"]}
+            display={"flex"}
+            alignItems={"center"}
+          >
+            <ChakraLink as={Link} to={"/gateway/new"}>
+              <Text fontSize={"sm"}>Add new Gateway</Text>
+            </ChakraLink>
+          </Heading>
+          <TableContainer w={["xs", "sm", "md", "full"]} mt="0px !important">
             <Table variant="striped">
               <Thead>
                 <Tr>

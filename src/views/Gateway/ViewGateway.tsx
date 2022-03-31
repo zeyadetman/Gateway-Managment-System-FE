@@ -123,13 +123,15 @@ function ViewGateway() {
                 alignItems={"center"}
               >
                 <Text>Devices</Text>
-                <ChakraLink
-                  as={Link}
-                  to={"/device/new"}
-                  state={{ gateway: gateway?.serialnumber }}
-                >
-                  <Text fontSize={"sm"}>Add new device</Text>
-                </ChakraLink>
+                {gateway?.devices.length < 10 ? (
+                  <ChakraLink
+                    as={Link}
+                    to={"/device/new"}
+                    state={{ gateway: gateway?.serialnumber }}
+                  >
+                    <Text fontSize={"sm"}>Add new device</Text>
+                  </ChakraLink>
+                ) : null}
               </Heading>
               <TableContainer
                 w={["xs", "sm", "md", "full"]}
