@@ -10,12 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { gatewayAPIInstance } from "../api/gateway";
+import ErrorMsg from "../components/ErrorMsg";
 
 interface Props {}
 
 function App(props: Props) {
-  const {} = props;
+  const navigate = useNavigate();
+  const [error, setError] = React.useState<string | null>(null);
 
   function validateName(value: any) {
     let error;
@@ -29,11 +32,16 @@ function App(props: Props) {
     <VStack w={"full"}>
       <Formik
         initialValues={{ serialNumber: "" }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }, 1000);
+        onSubmit={async (values, actions) => {
+          try {
+            const { data } = await gatewayAPIInstance.getGatewayBySerialNumber(
+              values.serialNumber
+            );
+            navigate(`/gateway/${data.serialnumber}`);
+          } catch (error: any) {
+            console.log(error?.response);
+            setError(error?.response?.data?.errors?.message);
+          }
         }}
       >
         {(props) => (
@@ -68,14 +76,17 @@ function App(props: Props) {
                 </FormControl>
               )}
             </Field>
-            <HStack spacing={2}>
-              <Button isLoading={props.isSubmitting} type="submit">
-                View
-              </Button>
-              <ChakraLink as={Link} to="/gateway/new">
-                Create new Gateway
-              </ChakraLink>
-            </HStack>
+            <VStack align={"flex-start"}>
+              <ErrorMsg error={error} onClose={() => setError(null)} />
+              <HStack spacing={2}>
+                <Button isLoading={props.isSubmitting} type="submit">
+                  View
+                </Button>
+                <ChakraLink as={Link} to="/gateway/new">
+                  Create new Gateway
+                </ChakraLink>
+              </HStack>
+            </VStack>
           </Form>
         )}
       </Formik>
