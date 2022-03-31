@@ -2,7 +2,7 @@ This cool project is a simple example of how to manage several gateways and devi
 
 ### Preview
 
-(URL: gms-zeyad.netlify.app)[gms-zeyad.netlify.app]
+[URL: gms-zeyad.netlify.app](gms-zeyad.netlify.app)
 ### `npm start`
 
 Runs the app in the development mode.<br /> Open
