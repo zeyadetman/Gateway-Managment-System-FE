@@ -17,7 +17,7 @@ REACT_APP_API_BASE_URL=
 
 - [Paper Wireframe Kit (Community)](https://www.figma.com/community/file/1075811850250564922)
 - [Chakra-ui](https://chakra-ui.com/)
-- Wireframes App (Balsamiq Wireframes) > Open musala.pdf file to view the wireframes.
+- Wireframes App (Balsamiq Wireframes) > Open gms.pdf file to view the wireframes.
 
 
 ### CI/CD
