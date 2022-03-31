@@ -17,3 +17,4 @@ in the console.
 
 - [Paper Wireframe Kit (Community)](https://www.figma.com/community/file/1075811850250564922)
 - [Chakra-ui](https://chakra-ui.com/)
+- Wireframes App (Balsamiq Wireframes)

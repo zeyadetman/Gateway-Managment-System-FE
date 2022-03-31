@@ -3,6 +3,7 @@ export const colors = {
   black: "#333333",
   white: "#FFFFFF",
   red: "#D64545",
+  redLight: "#d64545c9",
   green: "#57B571",
   highlight: "#FFEE97",
   highlight2: "#43E8FF",

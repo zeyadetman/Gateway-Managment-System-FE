@@ -8,16 +8,22 @@ import {
   VStack,
   Link as ChakraLink,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
+import { gatewayAPIInstance } from "../../api/gateway";
+import { GatwayValidationSchema } from "../../validations/gateway";
+import ErrorMsg from "../../components/ErrorMsg";
 
 interface Props {}
 
 function GatewayUpdate(props: Props) {
   const {} = props;
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [error, setError] = React.useState<string | null>(null);
 
   useEffect(() => {
     if (id) {
@@ -29,12 +35,18 @@ function GatewayUpdate(props: Props) {
     <VStack spacing={12}>
       <Heading>{id ? `Update ${id}` : "Create"}</Heading>
       <Formik
-        initialValues={{ serialNumber: "", name: "", ipv4: "" }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }, 1000);
+        initialValues={{ serialnumber: "", name: "", ip4: "" }}
+        validationSchema={GatwayValidationSchema}
+        onSubmit={async (values, actions) => {
+          try {
+            setError(null);
+            const { data } = await gatewayAPIInstance.createNewGateway(values);
+            navigate(`/gateway/${data.serialnumber}`);
+            return data;
+          } catch (e: any) {
+            setError(e?.response?.data?.errors?.message);
+            return e;
+          }
         }}
       >
         {(props) => (
@@ -45,25 +57,25 @@ function GatewayUpdate(props: Props) {
               flexDirection: "column",
             }}
           >
-            <Field name="serialNumber">
+            <Field name="serialnumber">
               {({ field, form }: any) => (
                 <FormControl
+                  w={["full", "sm"]}
                   isInvalid={
-                    form.errors.serialNumber && form.touched.serialNumber
+                    form.errors.serialnumber && form.touched.serialnumber
                   }
                 >
-                  <VStack align={"start"} shouldWrapChildren>
-                    <FormLabel htmlFor="serialNumber" m="0">
+                  <VStack align={"start"}>
+                    <FormLabel htmlFor="serialnumber" m="0">
                       Gateway Serial number
                     </FormLabel>
                     <Input
                       {...field}
-                      id="serialNumber"
-                      placeholder="serialNumber"
-                      w={["full", "sm"]}
+                      id="serialnumber"
+                      placeholder="serialnumber"
                     />
                     <FormErrorMessage color={"red"} m="0">
-                      {form.errors.serialNumber}
+                      {form.errors.serialnumber}
                     </FormErrorMessage>
                   </VStack>
                 </FormControl>
@@ -71,17 +83,15 @@ function GatewayUpdate(props: Props) {
             </Field>
             <Field name="name">
               {({ field, form }: any) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <VStack align={"start"} shouldWrapChildren>
+                <FormControl
+                  isInvalid={form.errors.name && form.touched.name}
+                  w={["full", "sm"]}
+                >
+                  <VStack align={"start"}>
                     <FormLabel htmlFor="name" m="0">
                       Name
                     </FormLabel>
-                    <Input
-                      {...field}
-                      id="name"
-                      placeholder="name"
-                      w={["full", "sm"]}
-                    />
+                    <Input {...field} id="name" placeholder="name" />
                     <FormErrorMessage color={"red"} m="0">
                       {form.errors.name}
                     </FormErrorMessage>
@@ -89,34 +99,35 @@ function GatewayUpdate(props: Props) {
                 </FormControl>
               )}
             </Field>
-            <Field name="ipv4">
+            <Field name="ip4">
               {({ field, form }: any) => (
-                <FormControl isInvalid={form.errors.ipv4 && form.touched.ipv4}>
-                  <VStack align={"start"} shouldWrapChildren>
-                    <FormLabel htmlFor="ipv4" m="0">
+                <FormControl
+                  isInvalid={form.errors.ip4 && form.touched.ip4}
+                  w={["full", "sm"]}
+                >
+                  <VStack align={"start"}>
+                    <FormLabel htmlFor="ip4" m="0">
                       IPV4
                     </FormLabel>
-                    <Input
-                      {...field}
-                      id="ipv4"
-                      placeholder="ipv4"
-                      w={["full", "sm"]}
-                    />
+                    <Input {...field} id="ip4" placeholder="ip4" />
                     <FormErrorMessage color={"red"} m="0">
-                      {form.errors.ipv4}
+                      {form.errors.ip4}
                     </FormErrorMessage>
                   </VStack>
                 </FormControl>
               )}
             </Field>
-            <HStack spacing={2} mt={12}>
-              <Button isLoading={props.isSubmitting} type="submit">
-                {id ? "Update" : "Create"}
-              </Button>
-              <ChakraLink as={Link} to="/gateways">
-                List Gateways
-              </ChakraLink>
-            </HStack>
+            <VStack align={"flex-start"}>
+              <ErrorMsg error={error} onClose={() => setError(null)} />
+              <HStack spacing={2}>
+                <Button isLoading={props.isSubmitting} type="submit">
+                  {id ? "Update" : "Create"}
+                </Button>
+                <ChakraLink as={Link} to="/gateways">
+                  List Gateways
+                </ChakraLink>
+              </HStack>
+            </VStack>
           </Form>
         )}
       </Formik>

@@ -52,7 +52,7 @@ function ListDevices(props: Props) {
           </Tbody>
         </Table>
 
-        <Pagination />
+        <Pagination total={10} />
       </TableContainer>
     </VStack>
   );

@@ -1,29 +1,64 @@
-import { Button, Flex, HStack } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import ChocPagination from "@choc-ui/paginator";
+import { forwardRef } from "react";
+import { LIMIT } from "../utils";
 
-const Pagination = () => {
-  const PagButton = (props: any) => {
-    return (
-      <Button
-        cursor={props.disabled && "not-allowed"}
-        {...(props.active ? { variant: "solid" } : { variant: "outline" })}
-        size="sm"
-      >
-        {props.children}
-      </Button>
-    );
-  };
+interface Props {
+  total: number;
+  currentPage?: number;
+  limit?: number;
+}
+
+const Pagination = ({ total, currentPage, limit }: Props) => {
+  const Prev = forwardRef((props: any) => (
+    <Button
+      {...props}
+      variant="outline"
+      disabled={props?.onClick ? false : true}
+    >
+      {"<"}
+    </Button>
+  ));
+
+  const Next = forwardRef((props: any) => (
+    <Button
+      {...props}
+      variant="outline"
+      disabled={props?.onClick ? false : true}
+    >
+      {">"}
+    </Button>
+  ));
+
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
-      <HStack spacing={2}>
-        <PagButton>{"<"}</PagButton>
-        <PagButton>1</PagButton>
-        <PagButton active>2</PagButton>
-        <PagButton>3</PagButton>
-        <PagButton>4</PagButton>
-        <PagButton>5</PagButton>
-        <PagButton>{">"}</PagButton>
-      </HStack>
-    </Flex>
+    <ChocPagination
+      total={total}
+      currentPage={currentPage}
+      pageSize={limit || LIMIT}
+      size={"sm"}
+      paginationProps={{ display: "flex", justifyContent: "center" }}
+      activeStyles={{
+        bg: "black",
+        color: "white",
+        _hover: {
+          bg: "black",
+        },
+      }}
+      baseStyles={{
+        bg: "white",
+        color: "black",
+      }}
+      hoverStyles={{
+        bg: "gray.50",
+      }}
+      itemRender={(_, type) => {
+        if (type === "prev") {
+          return Prev;
+        } else if (type === "next") {
+          return Next;
+        }
+      }}
+    />
   );
 };
 

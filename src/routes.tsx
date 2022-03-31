@@ -19,11 +19,11 @@ const NotFound = () => {
 
 export const routes = [
   { path: "/", element: <App /> },
-  { path: "/gateway/edit/:id", element: <GatewayUpdate /> },
+  { path: "/gateway/:id/edit", element: <GatewayUpdate /> },
   { path: "/gateway/new", element: <GatewayUpdate /> },
   { path: "/gateway/:id", element: <ViewGateway /> },
   { path: "/gateways", element: <ListGateways /> },
-  { path: "/device/edit/:id", element: <DeviceUpdate /> },
+  { path: "/device/:id/edit", element: <DeviceUpdate /> },
   { path: "/device/new", element: <DeviceUpdate /> },
   { path: "/device/:id", element: <ViewDevice /> },
   { path: "/devices", element: <ListDevices /> },

@@ -1,11 +1,29 @@
 /* eslint-disable import/no-anonymous-default-export */
 
 export default {
-  baseStyle: {
-    _focus: {
+  baseStyle: ({ theme }: any) => ({
+    _disabled: {
+      opacity: 1,
+      cursor: "not-allowed",
       boxShadow: "none",
+      border: "4px solid",
+      borderColor: theme.colors.black,
+      bgColor: theme.colors.gray["300"],
+      color: theme.colors.black,
+      _hover: {
+        borderColor: theme.colors.black,
+        bgColor: theme.colors.gray["300"],
+        color: theme.colors.black,
+      },
     },
-  },
+    _hover: {
+      _disabled: {
+        borderColor: theme.colors.black,
+        bgColor: theme.colors.gray["300"],
+        color: theme.colors.black,
+      },
+    },
+  }),
   sizes: {
     md: {
       border: "none",
