@@ -24,5 +24,9 @@ Runs the app in the development mode.<br /> Open
 
 - Netlify Bot.
 
+### Server Side
+
+The Backend for this app is built using NodeJS and MongoDB, [The Repository for the backend is here.](https://github.com/zeyadetman/Gateway-Managment-System-BE)
+
 ### Contacts
 [@zeyadetman](https://github.com/zeyadetman)
