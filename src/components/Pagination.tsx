@@ -7,10 +7,11 @@ interface Props {
   total: number;
   currentPage?: number;
   limit?: number;
+  paginationProps?: any;
 }
 
-const Pagination = ({ total, currentPage, limit }: Props) => {
-  const Prev = forwardRef((props: any) => (
+const Pagination = ({ total, currentPage, limit, paginationProps }: Props) => {
+  const Prev = forwardRef((props: any, ref: any) => (
     <Button
       {...props}
       variant="outline"
@@ -20,7 +21,7 @@ const Pagination = ({ total, currentPage, limit }: Props) => {
     </Button>
   ));
 
-  const Next = forwardRef((props: any) => (
+  const Next = forwardRef((props: any, ref: any) => (
     <Button
       {...props}
       variant="outline"
@@ -33,7 +34,7 @@ const Pagination = ({ total, currentPage, limit }: Props) => {
   return (
     <ChocPagination
       total={total}
-      currentPage={currentPage}
+      current={currentPage}
       pageSize={limit || LIMIT}
       size={"sm"}
       paginationProps={{ display: "flex", justifyContent: "center" }}
@@ -58,6 +59,7 @@ const Pagination = ({ total, currentPage, limit }: Props) => {
           return Next;
         }
       }}
+      {...paginationProps}
     />
   );
 };
