@@ -8,7 +8,7 @@ function Layout() {
       <Heading alignSelf="flex-start" py={[2, 4]} px={[4, 8]} h="80px">
         GMS
       </Heading>
-      <Center minH="calc(100vh - 150px)" py="4">
+      <Center minH="calc(100vh - 150px)" py={[2, 4]}>
         <Outlet />
       </Center>
       <footer>
