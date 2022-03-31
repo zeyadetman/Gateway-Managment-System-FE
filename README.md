@@ -11,7 +11,7 @@ Runs the app in the development mode.<br /> Open
 
 ### Environment Variables
 
-REACT_APP_API_BASE_URL=
+`REACT_APP_API_BASE_URL`: The base url of the API.
 
 ### Design System
 
