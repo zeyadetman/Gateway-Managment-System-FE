@@ -193,6 +193,10 @@ function DeviceUpdate() {
                         >
                           {renderGatewaysList(gateways || [])}
                         </Select>
+                        <FormHelperText>
+                          {state?.gateway &&
+                            "Selected for you based on your navigation!"}
+                        </FormHelperText>
                         <FormErrorMessage color={"red"} m="0">
                           {form.errors.gatewaySerialNumber}
                         </FormErrorMessage>

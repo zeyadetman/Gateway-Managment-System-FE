@@ -1,20 +1,28 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+This cool project is a simple example of how to manage several gateways and devices related to them.
 
-## Available Scripts
+### Preview
 
-In the project directory, you can run:
-
+URL: gms-zeyad.netlify.app
 ### `npm start`
 
 Runs the app in the development mode.<br /> Open
 [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+
+### Environment Variables
+
+REACT_APP_API_BASE_URL=
 
 ### Design System
 
 - [Paper Wireframe Kit (Community)](https://www.figma.com/community/file/1075811850250564922)
 - [Chakra-ui](https://chakra-ui.com/)
-- Wireframes App (Balsamiq Wireframes)
+- Wireframes App (Balsamiq Wireframes) > Open musala.pdf file to view the wireframes.
+
+
+### CI/CD
+
+- Netlify Bot.
+
+### Contacts
+[@zeyadetman](https://github.com/zeyadetman)
